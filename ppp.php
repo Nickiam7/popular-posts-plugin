@@ -38,3 +38,38 @@ function ppp_popular_post_counter( $post_id ) {
 	ppp_popular_post_view( $post_id );
 }
 add_action( 'wp_head', 'ppp_popular_post_counter' );
+/**
+* Add popular posts data to all posts table
+*/
+function ppp_add_views_column( $defaults ) {
+	$defaults['post_views'] = 'View Count';
+	return $defaults;
+}
+add_filter( 'manage_posts_columns', 'ppp_add_views_column' );
+
+function ppp_display_views( $column_name ) {
+	if( $column_name === 'post_views' ) {
+		echo( int ) get_post_meta( get_the_ID(), 'views', true);
+	}
+}
+add_action( 'manage_posts_custom_column', 'ppp_display_views', 5, 2 );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
